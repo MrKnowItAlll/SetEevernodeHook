@@ -38,7 +38,7 @@ example
 
 **Then run the script to set it**
 
-    ts-node ts-node evernode_hook_set.ts
+    ts-node evernode_hook_set.ts
 
 
 
