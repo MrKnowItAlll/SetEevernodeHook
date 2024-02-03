@@ -7,6 +7,8 @@ Hook allows for EVR to be accepted by forwarded account, but will forward all EV
 
     git clone https://github.com/MrKnowItAlll/SetEevernodeHook.git
     cd SetEevernodeHook
+    npm install 16
+    npm use 16
     npm install
     npm i -g c2wasm-cli xrpld-cli
     npm install -g ts-node
