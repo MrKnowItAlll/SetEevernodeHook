@@ -21,8 +21,7 @@ example
 
     #define XAH_FORWARD_ACT "rDiNoBVMnYNqwUKFCUKmXWEg6a7RvWWkYT"
 
-**compile hook:
-**
+**compile hook:**
 
     c2wasm-cli redirect.c build/
 
@@ -37,8 +36,7 @@ example
 
     const myWallet = Wallet.fromSeed('sEdVncdZZoZ2BjYFVPmfvC2FmecXDJo');
 
-**Then run the script to set it:
-**
+**Then run the script to set it**
 
     ts-node ts-node evernode_hook_set.ts
 
