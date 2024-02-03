@@ -63,7 +63,6 @@ int64_t hook(uint32_t reserved)
     TRACESTR("redirect.c: Called.");
 
     // ACCOUNT: Hook Account
-    uint8_t hook_acc[20];
     hook_account(HOOK_ACC, 20);
 
     // ACCOUNT: Origin Tx Account
@@ -71,7 +70,7 @@ int64_t hook(uint32_t reserved)
     otxn_field(otx_acc, 20, sfAccount);
 
     // FILTER ON: ACCOUNT
-    if (BUFFER_EQUAL_20(hook_acc, otx_acc))
+    if (BUFFER_EQUAL_20(HOOK_ACC, otx_acc))
         DONE("redirect: outgoing tx on `Account`.");
 	
     // FILTER ON: EXCLUDE ACCOUNT
