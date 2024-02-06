@@ -13,35 +13,29 @@ Hook allows for EVR to be accepted by forwarded account, but will forward all EV
     npm i -g c2wasm-cli xrpld-cli
     npm install -g ts-node
 
-## Adjust hook to your destination and compile
+## Compile hook with your Destination Address to forward EVR to(Hook only needs to be compiled once, then same hook can be set on all hosts if you have more than 1)
 
-modify hook **redirect.c** rAddress:
+    ./build_hook.sh
 
-    #define XAH_FORWARD_ACT ""
+example output
 
-example
+    Please insert your Xahau Destination address:
+    **rDiNoBVMnYNqwUKFCUKmXWEg6a7RvWWkYT**
+    Are you sure [rDiNoBVMnYNqwUKFCUKmXWEg6a7RvWWkYT] Destination is where you want to send your EVR to [y/N]? **y**
+    Creating the hook with rAddress: rDiNoBVMnYNqwUKFCUKmXWEg6a7RvWWkYT
+    Compiling hook
+    Done
 
-    #define XAH_FORWARD_ACT "rDiNoBVMnYNqwUKFCUKmXWEg6a7RvWWkYT"
+## Set copiled hook onto host account insert host seed
 
-**compile hook:**
-
-    c2wasm-cli redirect.c build/
-
-## Set copiled hook onto host account
-
-modify set script **evernode_hook_set.ts** seed:
-
-    const myWallet = Wallet.fromSeed('');
-
-
-example
-
-    const myWallet = Wallet.fromSeed('sEdVncdZZoZ2BjYFVPmfvC2FmecXDJo');
-
-**Then run the script to set it**
-
+Run:
     ts-node evernode_hook_set.ts
 
+example output:
 
-
-
+    Please input your Host secret[seed]:**sEdVncdZZoZ2BjYFVPmfvC2FmecXDJo**
+    Are you sure you want to install the hook using the seed [sEdVncdZZoZ2BjYFVPmfvC2FmecXDJo]  [yes/N]?**yes**
+    ...
+    ...
+    ...
+    Hook set successfully.

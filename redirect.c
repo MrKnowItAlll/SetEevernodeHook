@@ -55,9 +55,6 @@ uint8_t txn[283] =
 
 #define CURRENCY_OFFSET 8U
 
-//Edit this to your destination rAddress
-#define XAH_FORWARD_ACT ""
-
 int64_t hook(uint32_t reserved)
 {
     TRACESTR("redirect.c: Called.");

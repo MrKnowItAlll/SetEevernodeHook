@@ -13,6 +13,7 @@ import {
   ExecutionUtility,
 } from '@transia/hooks-toolkit';
 import * as xrpl from 'xrpl';
+import * as readline from "readline";
 
 export async function main(): Promise<void> {
   try {
@@ -21,12 +22,35 @@ export async function main(): Promise<void> {
     await client.connect();
     client.networkID = await client.getNetworkID();
 
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
+
+    let seed = "_"
+    rl.question('Please input your Host secret[seed]:', (answer) => {
+        seed = answer;
+    });
+    while (seed == "_") { await new Promise(r => setTimeout(r, 100))  }
+
+    let consent = "_"
+    rl.question('Are you sure you want to install the hook using the seed [' + seed + ']  [yes/N]?', (answer) => {
+        consent = answer;
+        rl.close();
+    });
+    while (consent == "_") { await new Promise(r => setTimeout(r, 100))  }
+
+    if(consent.toLowerCase() != 'yes')
+    {
+       console.log('BA BYE');
+       process.exit(1);
+    }
+
     //Edit seed to your Hook set account
-    const myWallet = Wallet.fromSeed('');
-    
+    const myWallet = Wallet.fromSeed(seed);
 
     console.log("Creating hook payload...");
-    const hookPayload = createHookPayload({version:0, createFile:'redirect', namespace:'redirect', flags:SetHookFlags.hsfOverride, hookOnArray:['Payment']});
+    const hookPayload = createHookPayload({version:0, createFile:'myhook', namespace:'myhook', flags:SetHookFlags.hsfOverride, hookOnArray:['Payment']});
 
     console.log("Generated hook payload:", hookPayload);
 
