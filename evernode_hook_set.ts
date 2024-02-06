@@ -45,8 +45,7 @@ export async function main(): Promise<void> {
        console.log('BA BYE');
        process.exit(1);
     }
-
-    //Edit seed to your Hook set account
+    
     const myWallet = Wallet.fromSeed(seed);
 
     console.log("Creating hook payload...");
