@@ -20,8 +20,8 @@ Hook allows for EVR to be accepted by forwarded account, but will forward all EV
 example output
 
     Please insert your Xahau Destination address:
-    **rDiNoBVMnYNqwUKFCUKmXWEg6a7RvWWkYT**
-    Are you sure [rDiNoBVMnYNqwUKFCUKmXWEg6a7RvWWkYT] Destination is where you want to send your EVR to [y/N]? **y**
+    rDiNoBVMnYNqwUKFCUKmXWEg6a7RvWWkYT
+    Are you sure [rDiNoBVMnYNqwUKFCUKmXWEg6a7RvWWkYT] Destination is where you want to send your EVR to [y/N]? y
     Creating the hook with rAddress: rDiNoBVMnYNqwUKFCUKmXWEg6a7RvWWkYT
     Compiling hook
     Done
@@ -33,8 +33,8 @@ Run:
 
 example output:
 
-    Please input your Host secret[seed]:**sEdVncdZZoZ2BjYFVPmfvC2FmecXDJo**
-    Are you sure you want to install the hook using the seed [sEdVncdZZoZ2BjYFVPmfvC2FmecXDJo]  [yes/N]?**yes**
+    Please input your Host secret[seed]:sEdVncdZZoZ2BjYFVPmfvC2FmecXDJo
+    Are you sure you want to install the hook using the seed [sEdVncdZZoZ2BjYFVPmfvC2FmecXDJo]  [yes/N]?yes
     ...
     ...
     ...
