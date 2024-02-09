@@ -3,6 +3,10 @@
 Small hook to forrward host EVR rewards to a specific Xahau account.
 Hook allows for EVR to be accepted by forwarded account, but will forward all EVR received to the destination account set in the Hook
 
+Hook was developed by Transia, original hook:
+
+https://github.com/Transia-RnD/xhs-library/tree/main/contracts/redirect
+
 ## Setup
 
     git clone https://github.com/MrKnowItAlll/SetEevernodeHook.git
