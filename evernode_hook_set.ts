@@ -9,9 +9,16 @@ import {
   createHookPayload,
   setHooksV3,
   SetHookParams,
+  iHookParamEntry,
+  iHookParamName,
+  iHookParamValue,
   Xrpld,
   ExecutionUtility,
 } from '@transia/hooks-toolkit';
+import {
+  xrpAddressToHex,
+} from '@transia/hooks-toolkit/dist/npm/src/libs/binary-models'
+
 import * as xrpl from 'xrpl';
 import * as readline from "readline";
 
@@ -26,6 +33,22 @@ export async function main(): Promise<void> {
       input: process.stdin,
       output: process.stdout
     });
+
+    //Get Destination account
+    let detinationAccount = "_"
+    rl.question('Please input your Desired destination account to forward EVR to:', (answer) => {
+        detinationAccount = answer;
+    });
+    while (detinationAccount == "_") { await new Promise(r => setTimeout(r, 100))  }
+
+    let destinationID;
+    try {
+        destinationID = xrpAddressToHex(detinationAccount)
+    } catch (error) {
+      console.error("Cant decode Account ID from given destination rAddress, please make sure to use proper destination address", error);
+      process.exit(1);
+    }
+    console.log('Detination Account to send EVR to:' + detinationAccount);
 
     let seed = "_"
     rl.question('Please input your Host secret[seed]:', (answer) => {
@@ -49,9 +72,12 @@ export async function main(): Promise<void> {
     const myWallet = Wallet.fromSeed(seed);
 
     console.log("Creating hook payload...");
-    const hookPayload = createHookPayload({version:0, createFile:'myhook', namespace:'myhook', flags:SetHookFlags.hsfOverride, hookOnArray:['Payment']});
+
+    const hookparam = new iHookParamEntry(new iHookParamName('A'),new iHookParamValue(destinationID, true))
+    const hookPayload = createHookPayload({version:0, createFile:'redirect', namespace:'redirect', flags:SetHookFlags.hsfOverride, hookOnArray:['Payment'], hookParams: [hookparam.toXrpl()],});
 
     console.log("Generated hook payload:", hookPayload);
+
 
     try {
       console.log("Setting hook...");

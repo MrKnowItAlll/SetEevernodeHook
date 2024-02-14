@@ -69,13 +69,6 @@ int64_t hook(uint32_t reserved)
     // FILTER ON: ACCOUNT
     if (BUFFER_EQUAL_20(HOOK_ACC, otx_acc))
         DONE("redirect: outgoing tx on `Account`.");
-	
-    // FILTER ON: EXCLUDE ACCOUNT
-    uint8_t exclude_accnt[20];
-    int64_t ret = util_accid(SBUF(exclude_accnt), SBUF(XAH_FORWARD_ACT));
-    if (BUFFER_EQUAL_20(exclude_accnt, otx_acc))
-        DONE("redirect: Accepting EVR from excluded account");
-
 
     uint8_t amount_buf[48];
     int64_t amount_len = otxn_field(SBUF(amount_buf), sfAmount);
@@ -83,6 +76,17 @@ int64_t hook(uint32_t reserved)
     {
         DONE("redirect: Ignoring XRP Transaction");
     }
+
+    // HOOK PARAM: Get account Destination
+    uint8_t dest_key[1] = {'A'};
+    if (hook_param(OTX_ACC, 20, SBUF(dest_key)) != 20)
+    {
+        DONE("redirect.c: Cant get Hook Parameter `A`");
+    }
+
+    // FILTER ON: EXCLUDE ACCOUNT
+    if (BUFFER_EQUAL_20(OTX_ACC, otx_acc))
+        DONE("redirect: Accepting EVR from excluded account");
 
     int64_t oslot = otxn_slot(0);
     if (oslot < 0)
@@ -103,9 +107,6 @@ int64_t hook(uint32_t reserved)
     {
         DONE("redirect: Ignoring non EVR Transaction");
     }
-
-    //Set redirect account
-    util_accid(OTX_ACC, 20, SBUF(XAH_FORWARD_ACT));
 
     // TXN: PREPARE: Init
     etxn_reserve(1);
