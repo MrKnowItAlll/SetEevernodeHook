@@ -1,34 +1,34 @@
 {
-  "name": "hooks-playground",
-  "version": "1.0.0",
-  "description": "A playground to demo the hooks library sdk.",
-  "main": "index.js",
+  "name": "@transia/xhs-library",
+  "version": "0.0.1",
+  "description": "A library of Xahau Hook Standards.",
   "scripts": {
-    "build:hook": "c2wasm-cli contracts/redirect.c build/",
-    "build:hook:xpop": "c2wasm-cli contracts/xpop_nft_uri.c build/",
-    "standalone": "yarn run build:hook && ts-node src/standalone.ts",
-    "minicluster": "yarn run build:hook && ts-node src/minicluster.ts",
-    "testnet": "yarn run build:hook && ts-node src/testnet.ts",
-    "testnet:xpop": "yarn run build:hook:xpop && ts-node src/testnet-xpop.ts",
-    "lint": "eslint ./src/**/* --ext .ts",
-    "format": "npx prettier --write ./src"
+    "build:hooks": "c2wasm-cli contracts build",
+    "test:integration": "jest --config=jest.config.integration.js --runInBand",
+    "lint": "eslint ./test/**/* --ext .ts",
+    "format": "npx prettier --write ./test"
   },
   "author": {
     "name": "Denis Angell",
     "url": "https://github.com/dangell7"
   },
-  "license": "ISC",
+  "license": "GPL-3.0-or-later",
   "dependencies": {
-    "@transia/hooks-toolkit": "^1.0.4",
-    "dotenv": "^16.3.1",
-    "ripple-address-codec": "^4.3.1",
+    "@transia/hooks-toolkit": "^1.0.13",
+    "@transia/ripple-binary-codec": "^1.4.6-alpha.8",
+    "c2wasm-cli": "^1.0.6",
+    "chai": "^4.3.7",
+    "crypto-js": "^4.1.1",
+    "xrpl-client": "^2.3.1",
+    "xrpl-orderbook-reader": "^0.4.0",
     "xrpl": "^2.14.0"
   },
   "devDependencies": {
-    "@tsconfig/node16": "^1.0.4",
+    "@tsconfig/node16": "^1.0.3",
     "@types/chai": "^4.3.4",
     "@types/crypto-js": "^4.1.1",
     "@types/jest": "^29.5.0",
+    "@types/lodash": "^4.14.192",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "@typescript-eslint/parser": "^5.54.1",
     "eslint": "^8.36.0",
